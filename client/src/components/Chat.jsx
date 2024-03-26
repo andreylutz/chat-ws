@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 export const Chat = () => {
   const { search } = useLocation();
   const [params, setParams] = useState(null);
+  const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
     const searchParams = Object.fromEntries(new URLSearchParams(search));
@@ -14,7 +15,7 @@ export const Chat = () => {
 
   useEffect(() => {
     socket.on("message", ({ data }) => {
-      console.warn(data);
+      setNotifications((_notifications) => [..._notifications, data]);
     });
   }, []);
 

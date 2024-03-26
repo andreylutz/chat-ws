@@ -4,12 +4,12 @@ import styles from "../styles/Main.module.css";
 
 const FIELDS = {
   ROOM: "room",
-  USERNAME: "userName",
+  NAME: "name",
 };
 
 export const Main = () => {
-  const { ROOM, USERNAME } = FIELDS;
-  const [values, setValues] = useState({ [ROOM]: "", [USERNAME]: "" });
+  const { ROOM, NAME } = FIELDS;
+  const [values, setValues] = useState({ [ROOM]: "", [NAME]: "" });
 
   const handleChange = ({ target: { value, name } }) => {
     setValues({ ...values, [name]: value });
@@ -28,8 +28,8 @@ export const Main = () => {
           <div className={styles.group}>
             <input
               type="text"
-              name="userName"
-              value={values[USERNAME]}
+              name="name"
+              value={values[NAME]}
               placeholder="Имя пользователя"
               className={styles.input}
               onChange={handleChange}
@@ -51,7 +51,7 @@ export const Main = () => {
           </div>
           <Link
             className={styles.group}
-            to={`/chat?userName=${values[USERNAME]}&room=${values[ROOM]}`}
+            to={`/chat?name=${values[NAME]}&room=${values[ROOM]}`}
             onClick={handleClick}
           >
             <button type="submit" className={styles.button}>
