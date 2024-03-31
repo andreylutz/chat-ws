@@ -4,7 +4,7 @@ const cors = require("cors");
 const express = require("express");
 const http = require("http");
 
-const { addUser } = require("./users");
+const { addUser, findUser } = require("./users");
 
 const app = express();
 const server = http.createServer(app);
@@ -35,6 +35,14 @@ io.on("connection", (socket) => {
         message: `Пользователь ${name}, присоединился!`,
       },
     });
+  });
+
+  socket.on("sendMessage", ({ message, params }) => {
+    const user = findUser(params);
+
+    if (user) {
+      io.to(user.room).emit("message", { data: { user, message } });
+    }
   });
 
   io.on("disconnect", () => {

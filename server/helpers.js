@@ -1,4 +1,4 @@
-const trimStr = (str) => str.trim().toLowerCase();
+const trimStr = (str) => str?.trim()?.toLowerCase();
 
 module.exports = {
   trimStr,
